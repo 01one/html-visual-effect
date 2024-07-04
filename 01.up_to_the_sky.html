@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Up to the sky</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+        }
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 100%;
+            background-color: #00FFFF;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            document.body.appendChild(particle);
+            return particle;
+        }
+
+        function animateParticles() {
+            const particles = document.querySelectorAll('.particle');
+            gsap.to(particles, {
+                duration: 1,
+                y: "-100%", // Move particles up by 100% of the window height
+                ease: "power1.inOut", // Use a smooth ease in and out
+                stagger: 0.01, // Apply a small delay between each particle animation
+                repeat: -1, // Repeat the animation indefinitely
+                yoyo: true // Make the animation play in reverse
+            });
+        }
+
+        // Create particles and start the animation when the window loads
+        window.onload = function() {
+            const particleCount = 500;
+            for (let i = 0; i < particleCount; i++) {
+                createParticle();
+            }
+            animateParticles();
+        };
+    </script>
+</body>
+</html>

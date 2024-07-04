@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gravity and Anti Gravity</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: #00FF00; /* Set the color of the text */
+            font-family: "Courier New", Courier, monospace;
+        }
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 100%;
+            font-size: 10px;
+            line-height: 10px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Function to createparticles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.innerText = getRandomCharacter(); // Set random ASCII character
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px'; // Start from the bottom
+            document.body.appendChild(particle);
+            return particle;
+        }
+
+        // Function to get a random ASCII character
+        function getRandomCharacter() {
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+
+        // Animate the particles
+        function animateParticles() {
+            const particles = document.querySelectorAll('.particle');
+            gsap.to(particles, {
+                duration: 1,
+                y: "-100%", // Move particles up by 100% of the window height
+                ease: "power1.inOut", // Use a smooth ease in and out
+                stagger: 0.01, // Apply a small delay between each particle animation
+                repeat: -1, // Repeat the animation indefinitely
+                yoyo: true // Make the animation play in reverse
+            });
+        }
+
+        // Create particles and start the animation when the window loads
+        window.onload = function() {
+            const particleCount = 1000; // Increase the particle count
+            for (let i = 0; i < particleCount; i++) {
+                createParticle();
+            }
+            animateParticles();
+        };
+    </script>
+</body>
+</html>

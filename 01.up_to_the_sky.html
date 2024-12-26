@@ -37,15 +37,14 @@
             const particles = document.querySelectorAll('.particle');
             gsap.to(particles, {
                 duration: 1,
-                y: "-100%", // Move particles up by 100% of the window height
-                ease: "power1.inOut", // Use a smooth ease in and out
-                stagger: 0.01, // Apply a small delay between each particle animation
-                repeat: -1, // Repeat the animation indefinitely
+                y: "-100%",
+                ease: "power1.inOut", 
+                stagger: 0.01,
+                repeat: -1,
                 yoyo: true // Make the animation play in reverse
             });
         }
 
-        // Create particles and start the animation when the window loads
         window.onload = function() {
             const particleCount = 500;
             for (let i = 0; i < particleCount; i++) {

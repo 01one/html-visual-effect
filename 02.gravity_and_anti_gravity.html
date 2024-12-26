@@ -12,7 +12,7 @@
             width: 100%;
             height: 100%;
             background-color: #000;
-            color: #00FF00; /* Set the color of the text */
+            color: #00FF00;
             font-family: "Courier New", Courier, monospace;
         }
         .particle {
@@ -26,7 +26,7 @@
 </head>
 <body>
     <script>
-        // Function to createparticles
+
         function createParticle() {
             const particle = document.createElement('div');
             particle.classList.add('particle');
@@ -43,7 +43,7 @@
             return characters.charAt(Math.floor(Math.random() * characters.length));
         }
 
-        // Animate the particles
+
         function animateParticles() {
             const particles = document.querySelectorAll('.particle');
             gsap.to(particles, {
@@ -51,14 +51,14 @@
                 y: "-100%", // Move particles up by 100% of the window height
                 ease: "power1.inOut", // Use a smooth ease in and out
                 stagger: 0.01, // Apply a small delay between each particle animation
-                repeat: -1, // Repeat the animation indefinitely
+                repeat: -1,
                 yoyo: true // Make the animation play in reverse
             });
         }
 
-        // Create particles and start the animation when the window loads
+
         window.onload = function() {
-            const particleCount = 1000; // Increase the particle count
+            const particleCount = 1000;
             for (let i = 0; i < particleCount; i++) {
                 createParticle();
             }

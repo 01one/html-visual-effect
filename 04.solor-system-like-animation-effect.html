@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sola System Like Animation Effect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden; 
+            background: black;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sun {
+            width: 200px;
+            height: 200px;
+
+            background-position: center;
+            border-radius: 50%;
+           
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.9;
+        }
+
+        .orbit {
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sun with Texture -->
+        <div class="sun" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/67/Largest_Solar_Flare_Since_2017_Spotted_on_the_Sun_%2849983663618%29.jpg'); background-size: cover;"></div>
+
+        <!-- Orbits -->
+        <div class="orbit" style="width: 200px; height: 200px;"></div> <!-- Mercury Orbit -->
+        <div class="orbit" style="width: 300px; height: 300px;"></div> <!-- Venus Orbit -->
+        <div class="orbit" style="width: 400px; height: 400px;"></div> <!-- Earth Orbit -->
+        <div class="orbit" style="width: 500px; height: 500px;"></div> <!-- Mars Orbit -->
+        <div class="orbit" style="width: 600px; height: 600px;"></div> <!-- Jupiter Orbit -->
+        <div class="orbit" style="width: 700px; height: 700px;"></div> <!-- Saturn Orbit -->
+        <div class="orbit" style="width: 800px; height: 800px;"></div> <!-- Uranus Orbit -->
+        <div class="orbit" style="width: 900px; height: 900px;"></div> <!-- Neptune Orbit -->
+
+        <!-- Planets with Textures from Wikimedia -->
+        <div class="planet" id="planet1" style="width: 20px; height: 20px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg');"></div> <!-- Mercury -->
+        <div class="planet" id="planet2" style="width: 30px; height: 30px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg');"></div> <!-- Venus -->
+        <div class="planet" id="planet3" style="width: 40px; height: 40px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg');"></div> <!-- Earth -->
+        <div class="planet" id="planet4" style="width: 35px; height: 35px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg');"></div> <!-- Mars -->
+        <div class="planet" id="planet5" style="width: 70px; height: 70px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg');"></div> <!-- Jupiter -->
+        <div class="planet" id="planet6" style="width: 60px; height: 60px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg');"></div> <!-- Saturn -->
+        <div class="planet" id="planet7" style="width: 55px; height: 55px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg');"></div> <!-- Uranus -->
+        <div class="planet" id="planet8" style="width: 50px; height: 50px; background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg');"></div> <!-- Neptune -->
+    </div>
+
+    <script>
+        const planets = [
+            { id: 'planet1', radius: 100, speed: 0.2 }, // Mercury
+            { id: 'planet2', radius: 150, speed: 0.12 }, // Venus
+            { id: 'planet3', radius: 200, speed: 0.08 }, // Earth
+            { id: 'planet4', radius: 250, speed: 0.07 }, // Mars
+            { id: 'planet5', radius: 300, speed: 0.04 }, // Jupiter
+            { id: 'planet6', radius: 350, speed: 0.03 }, // Saturn
+            { id: 'planet7', radius: 400, speed: 0.025 }, // Uranus
+            { id: 'planet8', radius: 450, speed: 0.02 }, // Neptune
+        ];
+
+        function animatePlanets() {
+            const time = Date.now() * 0.009;
+            const containerWidth = window.innerWidth / 2;
+            const containerHeight = window.innerHeight / 2;
+
+            planets.forEach(planet => {
+                const planetElement = document.getElementById(planet.id);
+                const angle = time * planet.speed; // Calculate the current angle
+                const x = containerWidth + planet.radius * Math.cos(angle) - planetElement.offsetWidth / 2;
+                const y = containerHeight + planet.radius * Math.sin(angle) - planetElement.offsetHeight / 2;
+                planetElement.style.left = `${x}px`;
+                planetElement.style.top = `${y}px`;
+            });
+
+            requestAnimationFrame(animatePlanets);
+        }
+
+        animatePlanets();
+    </script>
+</body>
+</html>
